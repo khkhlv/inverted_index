@@ -4,21 +4,14 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
 import logging
-import re
 from collections import defaultdict
 import math
 import os
 import string
-import sys
 import struct
 import logging
-import bitstring
-from bitstring import Bits, BitArray, BitStream, pack
-
+from bitstring import BitStream, pack
 from pfodelta import pfordelta_decode, pfordelta_encode
-
-
-
 
 logger = logging.getLogger("InvertedIndex")
 

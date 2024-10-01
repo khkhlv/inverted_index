@@ -4,7 +4,7 @@ import logging
 from inverted_index import InvertedIndex
 import os
 
-exec_time_encode = []
+exec_time_encode = {[]}
 exec_time_build = []
 logger = logging.getLogger("Benchmark")
 
@@ -38,7 +38,7 @@ for i in range(10):
         start = time.perf_counter()
         res_list_encode = inverted_index.process_query_encode(query)
         end = time.perf_counter() - start
-        exec_time_encode.append(end * 1000)
+        exec_time_encode[query].append(end * 1000) 
         logger.info("Complete search [%s] in encode list", query)
 
 
@@ -61,7 +61,8 @@ for i in range(10):
     time_load.append(end * 1000)
 
 print(f"Время построения индекса: {np.mean(exec_time_build)} ms")
-print(f"Время поиска {np.mean(exec_time_encode)} ms")
-print(f"Время сохранения на диск {np.mean(time_write)} ms")
-print(f"Время cчитывания с диска {np.mean(time_load)} ms")
+for q in queries:
+    print(f"Время поиска для запроса {q}: {np.mean(exec_time_encode[q])} ms")
+print(f"Время сохранения на диск: {np.mean(time_write)} ms")
+print(f"Время cчитывания с диска: {np.mean(time_load)} ms")
 # print(f'inverted_index_load = {inverted_index_load.inverted_index}')
